@@ -1,0 +1,185 @@
+.login-page {
+  min-height: calc(100vh - 82px);
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  padding: 40px 20px;
+
+  box-sizing: border-box;
+
+  background:
+    radial-gradient(
+      circle at 50% 20%,
+      rgba(24, 199, 255, 0.1),
+      transparent 35%
+    ),
+    #050816;
+}
+
+.login-card {
+  width: 430px;
+
+  padding: 45px;
+
+  box-sizing: border-box;
+
+  background:
+    linear-gradient(
+      145deg,
+      #0d192d,
+      #081020
+    );
+
+  border: 1px solid #203650;
+
+  border-radius: 22px;
+
+  box-shadow:
+    0 25px 70px rgba(0, 0, 0, 0.4);
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 12px;
+}
+
+.login-icon {
+  width: 60px;
+  height: 60px;
+
+  margin-bottom: 5px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 16px;
+
+  background: rgba(24, 199, 255, 0.1);
+
+  border: 1px solid rgba(24, 199, 255, 0.25);
+
+  color: #18c7ff;
+
+  font-size: 27px;
+}
+
+.login-card h1 {
+  margin: 0;
+
+  color: white;
+
+  font-size: 32px;
+}
+
+.login-card > p {
+  margin: 0 0 15px;
+
+  color: #8998ae;
+
+  line-height: 1.6;
+}
+
+.login-card label {
+  margin-top: 5px;
+
+  color: #c4cfdd;
+
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+.login-card input {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 14px 15px;
+
+  border: 1px solid #203650;
+
+  border-radius: 10px;
+
+  outline: none;
+
+  background: #0b182a;
+
+  color: white;
+
+  font-size: 14px;
+
+  transition: border-color 0.2s;
+}
+
+.login-card input:focus {
+  border-color: #18c7ff;
+}
+
+.login-card input::placeholder {
+  color: #526176;
+}
+
+.login-button {
+  width: 100%;
+
+  margin-top: 10px;
+
+  padding: 15px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background: #18c7ff;
+
+  color: white;
+
+  font-size: 15px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.login-button:hover {
+  background: #0fa9db;
+
+  transform: translateY(-2px);
+}
+
+.login-error {
+  padding: 10px 12px;
+
+  border-radius: 8px;
+
+  background: rgba(239, 68, 68, 0.08);
+
+  border: 1px solid rgba(239, 68, 68, 0.2);
+
+  color: #f87171;
+
+  font-size: 13px;
+}
+
+.login-card small {
+  margin-top: 10px;
+
+  color: #536177;
+
+  text-align: center;
+
+  line-height: 1.5;
+}
+
+@media (max-width: 500px) {
+  .login-card {
+    padding: 30px 22px;
+  }
+}

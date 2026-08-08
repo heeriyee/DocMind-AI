@@ -1,0 +1,449 @@
+/* =========================================
+   UPLOAD PAGE
+========================================= */
+
+.upload-page {
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 50px 20px;
+
+  box-sizing: border-box;
+
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(24, 199, 255, 0.13),
+      transparent 35%
+    ),
+    #050816;
+
+  color: white;
+}
+
+
+/* =========================================
+   UPLOAD CARD
+========================================= */
+
+.upload-card {
+  width: 620px;
+  max-width: 100%;
+
+  padding: 45px;
+
+  box-sizing: border-box;
+
+  background:
+    linear-gradient(
+      145deg,
+      #0d192d,
+      #081020
+    );
+
+  border: 1px solid #203650;
+
+  border-radius: 24px;
+
+  text-align: center;
+
+  box-shadow:
+    0 25px 70px rgba(0, 0, 0, 0.4);
+
+  position: relative;
+  overflow: hidden;
+}
+
+.upload-card::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 20%;
+
+  width: 60%;
+  height: 1px;
+
+  background: #18c7ff;
+
+  box-shadow:
+    0 0 20px #18c7ff;
+
+  opacity: 0.8;
+}
+
+
+/* =========================================
+   ICON
+========================================= */
+
+.upload-icon {
+  width: 70px;
+  height: 70px;
+
+  margin: 0 auto 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 18px;
+
+  background: rgba(24, 199, 255, 0.1);
+
+  border: 1px solid rgba(24, 199, 255, 0.3);
+
+  font-size: 30px;
+}
+
+
+/* =========================================
+   HEADING
+========================================= */
+
+.upload-card h1 {
+  margin: 0;
+
+  color: white;
+
+  font-size: 34px;
+  font-weight: 700;
+
+  letter-spacing: -0.5px;
+}
+
+.upload-subtitle {
+  max-width: 480px;
+
+  margin: 12px auto 30px;
+
+  color: #9eabc0;
+
+  line-height: 1.7;
+
+  font-size: 15px;
+}
+
+
+/* =========================================
+   FILE DROP ZONE
+========================================= */
+
+.file-drop-zone {
+  min-height: 190px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  padding: 30px;
+
+  box-sizing: border-box;
+
+  border: 1.5px dashed #294d70;
+
+  border-radius: 18px;
+
+  background: #091525;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.file-drop-zone:hover {
+  border-color: #18c7ff;
+
+  background: #0b1a2d;
+
+  transform: translateY(-2px);
+}
+
+.file-drop-zone.file-selected {
+  border-color: #18c7ff;
+
+  background:
+    rgba(24, 199, 255, 0.06);
+}
+
+.file-drop-zone input {
+  display: none;
+}
+
+.file-icon {
+  width: 50px;
+  height: 50px;
+
+  margin-bottom: 8px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 14px;
+
+  background: rgba(24, 199, 255, 0.1);
+
+  color: #18c7ff;
+
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.file-drop-zone strong {
+  color: #eaf2ff;
+
+  font-size: 16px;
+}
+
+.file-drop-zone span {
+  color: #8291a8;
+
+  font-size: 13px;
+}
+
+
+/* =========================================
+   SELECTED FILE
+========================================= */
+
+.selected-file {
+  margin-top: 18px;
+
+  padding: 14px 16px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  text-align: left;
+
+  background: #0b182a;
+
+  border: 1px solid #203650;
+
+  border-radius: 12px;
+}
+
+.selected-file > span {
+  font-size: 22px;
+}
+
+.selected-file div {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 3px;
+}
+
+.selected-file strong {
+  color: #eaf2ff;
+
+  font-size: 14px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.selected-file small {
+  color: #718198;
+
+  font-size: 12px;
+}
+
+
+/* =========================================
+   UPLOAD BUTTON
+========================================= */
+
+.upload-button {
+  width: 100%;
+
+  margin-top: 20px;
+
+  padding: 16px;
+
+  border: none;
+  border-radius: 12px;
+
+  background: #18c7ff;
+
+  color: white;
+
+  font-size: 16px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+
+  box-shadow:
+    0 8px 25px rgba(24, 199, 255, 0.15);
+}
+
+.upload-button:hover:not(:disabled) {
+  background: #0fa9db;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 12px 30px rgba(24, 199, 255, 0.25);
+}
+
+.upload-button:disabled {
+  opacity: 0.45;
+
+  cursor: not-allowed;
+
+  box-shadow: none;
+}
+
+
+/* =========================================
+   MESSAGE
+========================================= */
+
+.upload-message {
+  margin-top: 18px;
+
+  padding: 12px 15px;
+
+  border-radius: 10px;
+
+  background: rgba(24, 199, 255, 0.08);
+
+  border: 1px solid rgba(24, 199, 255, 0.2);
+
+  color: #18c7ff;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  line-height: 1.5;
+}
+
+.upload-message.success {
+  background: rgba(34, 197, 94, 0.08);
+
+  border-color: rgba(34, 197, 94, 0.25);
+
+  color: #4ade80;
+}
+
+
+/* =========================================
+   INFORMATION
+========================================= */
+
+.upload-info {
+  margin-top: 25px;
+
+  padding: 15px;
+
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 10px;
+
+  text-align: left;
+
+  background: rgba(13, 23, 41, 0.7);
+
+  border: 1px solid #172a42;
+
+  border-radius: 12px;
+}
+
+.upload-info span {
+  font-size: 15px;
+}
+
+.upload-info p {
+  margin: 0;
+
+  color: #718198;
+
+  font-size: 12px;
+
+  line-height: 1.6;
+}
+
+
+/* =========================================
+   BACK BUTTON
+========================================= */
+
+.back-button {
+  margin-top: 20px;
+
+  border: none;
+
+  background: transparent;
+
+  color: #8190a6;
+
+  font-size: 13px;
+
+  cursor: pointer;
+
+  transition: color 0.2s ease;
+}
+
+.back-button:hover:not(:disabled) {
+  color: #18c7ff;
+}
+
+.back-button:disabled {
+  opacity: 0.4;
+
+  cursor: not-allowed;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+  .upload-page {
+    padding: 25px 15px;
+  }
+
+  .upload-card {
+    padding: 30px 20px;
+
+    border-radius: 18px;
+  }
+
+  .upload-card h1 {
+    font-size: 28px;
+  }
+
+  .upload-subtitle {
+    font-size: 14px;
+  }
+
+  .file-drop-zone {
+    min-height: 160px;
+
+    padding: 20px;
+  }
+
+}
