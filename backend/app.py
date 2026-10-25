@@ -38,7 +38,7 @@ gemini_client = genai.Client(
     api_key=GEMINI_API_KEY
 )
 
-GENERATION_MODEL = "gemini-3.6-flash"
+GENERATION_MODEL = "gemini-3.5-flash"
 EMBEDDING_MODEL = "gemini-embedding-001"
 
 
@@ -739,21 +739,54 @@ DOCUMENT:
     # Generate summary
     # --------------------------------------------------------
 
+   
     try:
-
         response = gemini_client.models.generate_content(
             model=GENERATION_MODEL,
             contents=prompt
         )
 
+        if not response.text:
+            raise HTTPException(
+                status_code=502,
+                detail="Gemini returned an empty summary. Please try again."
+            )
+
+    except HTTPException:
+        raise
+
     except Exception as e:
+        error_message = str(e)
+
+        if "503" in error_message or "UNAVAILABLE" in error_message:
+            raise HTTPException(
+                status_code=503,
+                detail="Gemini is temporarily overloaded. Please try again later."
+            )
 
         raise HTTPException(
-            status_code=500,
-            detail=f"AI summary generation failed: {str(e)}"
+            status_code=502,
+            detail=f"AI summary generation failed: {error_message}"
         )
 
     return {
         "filename": filename,
         "summary": response.text
     }
+
+    return {
+        "filename": filename,
+        "summary": response.text
+    }
+
+
+@app.get("/test-model")
+def test_model():
+    try:
+        response = gemini_client.models.generate_content(
+            model=GENERATION_MODEL,
+            contents="Reply with exactly: WORKING"
+        )
+        return {"model": GENERATION_MODEL, "response": response.text}
+    except Exception as e:
+        return {"model": GENERATION_MODEL, "error": str(e)}

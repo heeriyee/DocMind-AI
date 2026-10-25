@@ -1,9 +1,55 @@
+
+/* =========================================
+   GLOBAL APP STYLES
+========================================= */
+
 #root {
   min-height: 100vh;
   width: 100%;
 }
 
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background: #f7f8fc;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background: #f7f8fc;
+  color: #20283b;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 .app {
   min-height: 100vh;
-  background: #050816;
+  background: #f7f8fc;
+}
+
+/* Keep form controls consistent */
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

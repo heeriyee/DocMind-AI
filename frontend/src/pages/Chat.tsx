@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import "../styles/Chat.css";
@@ -12,13 +13,8 @@ interface Message {
 }
 
 function Chat() {
-  // Get selected document from URL
-  const params = new URLSearchParams(
-    window.location.search
-  );
-
-  const documentName =
-    params.get("document") || "";
+  const params = new URLSearchParams(window.location.search);
+  const documentName = params.get("document") || "";
 
   const [question, setQuestion] = useState("");
   const [loading, setLoading] = useState(false);
@@ -33,40 +29,29 @@ function Chat() {
   ]);
 
   const sendMessage = async () => {
-    if (!question.trim() || loading) {
-      return;
-    }
+    if (!question.trim() || loading) return;
 
     const userQuestion = question.trim();
 
-    // Show user's question immediately
     setMessages((prev) => [
       ...prev,
-      {
-        type: "user",
-        text: userQuestion,
-      },
+      { type: "user", text: userQuestion },
     ]);
 
-    // Clear input
     setQuestion("");
-
-    // Start loading
     setLoading(true);
 
     try {
       const response = await fetch(
-        "http://127.0.0.1:8001/chat",
+        "http://127.0.0.1:8000/chat",
         {
           method: "POST",
-
           headers: {
             "Content-Type": "application/json",
           },
-
           body: JSON.stringify({
             question: userQuestion,
-            filename: documentName,
+            filename: documentName || null,
           }),
         }
       );
@@ -75,20 +60,14 @@ function Chat() {
 
       if (!response.ok) {
         throw new Error(
-          data.detail ||
-            "Something went wrong."
+          typeof data.detail === "string"
+            ? data.detail
+            : `Request failed with status ${response.status}`
         );
       }
 
-      // ==========================================
-      // UPDATE QUESTIONS ASKED
-      // Only count successful questions
-      // ==========================================
-
       const currentCount = Number(
-        localStorage.getItem(
-          "docmind_questions"
-        ) || "0"
+        localStorage.getItem("docmind_questions") || "0"
       );
 
       localStorage.setItem(
@@ -96,39 +75,29 @@ function Chat() {
         String(currentCount + 1)
       );
 
-      // ==========================================
-      // SHOW AI ANSWER
-      // ==========================================
-
       setMessages((prev) => [
         ...prev,
         {
           type: "bot",
-
-          text:
-            data.answer ||
-            "I couldn't generate an answer.",
-
+          text: data.answer || "I couldn't generate an answer.",
           sources: data.sources || [],
         },
       ]);
-
     } catch (error) {
-      console.error(
-        "Chat error:",
-        error
-      );
+      console.error("Chat error:", error);
 
-      // Show error inside chat
+      const errorMessage =
+        error instanceof Error
+          ? error.message
+          : "An unknown error occurred.";
+
       setMessages((prev) => [
         ...prev,
         {
           type: "bot",
-          text:
-            "Sorry, I couldn't process your question. Please try again.",
+          text: `Sorry, I couldn't process your question.\n\n**Error:** ${errorMessage}`,
         },
       ]);
-
     } finally {
       setLoading(false);
     }
@@ -136,139 +105,70 @@ function Chat() {
 
   return (
     <div className="chat-page">
-
-      {/* =====================================
-          HEADER
-      ===================================== */}
-
       <div className="chat-header">
-
         <div className="chat-title">
-          <span className="chat-ai-icon">
-            ✦
-          </span>
+          <span className="chat-ai-icon">✦</span>
 
           <div>
             <h1>DocMind AI Chat</h1>
 
             {documentName && (
               <p>
-                Document:{" "}
-                <strong>
-                  {documentName}
-                </strong>
+                Document: <strong>{documentName}</strong>
               </p>
             )}
           </div>
         </div>
-
       </div>
-
-
-      {/* =====================================
-          CHAT WINDOW
-      ===================================== */}
 
       <div className="chat-window">
+        {messages.map((message, index) => (
+          <div
+            key={index}
+            className={
+              message.type === "user"
+                ? "user-message"
+                : "bot-message"
+            }
+          >
+            {message.type === "bot" ? (
+              <ReactMarkdown>{message.text}</ReactMarkdown>
+            ) : (
+              <p>{message.text}</p>
+            )}
 
-        {messages.map(
-          (message, index) => (
-
-            <div
-              key={index}
-              className={
-                message.type === "user"
-                  ? "user-message"
-                  : "bot-message"
-              }
-            >
-
-              {/* Message */}
-
-              {message.type === "bot" ? (
-                <ReactMarkdown>
-                  {message.text}
-                </ReactMarkdown>
-              ) : (
-                <p>{message.text}</p>
+            {message.type === "bot" &&
+              message.sources &&
+              message.sources.length > 0 && (
+                <div className="sources">
+                  <strong>Sources</strong>
+                  <ul>
+                    {message.sources.map((source, sourceIndex) => (
+                      <li key={sourceIndex}>
+                        {source.filename} — Chunk {source.chunk}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               )}
-
-
-              {/* Sources */}
-
-              {message.type === "bot" &&
-                message.sources &&
-                message.sources.length > 0 && (
-
-                  <div className="sources">
-
-                    <strong>
-                      Sources
-                    </strong>
-
-                    <ul>
-
-                      {message.sources.map(
-                        (
-                          source,
-                          sourceIndex
-                        ) => (
-
-                          <li
-                            key={
-                              sourceIndex
-                            }
-                          >
-                            {source.filename}
-                            {" — "}
-                            Chunk{" "}
-                            {source.chunk}
-                          </li>
-
-                        )
-                      )}
-
-                    </ul>
-
-                  </div>
-
-                )}
-
-            </div>
-
-          )
-        )}
-
-
-        {/* =================================
-            LOADING
-        ================================= */}
+          </div>
+        ))}
 
         {loading && (
-
           <div className="bot-message thinking-message">
-
-            <span>
-              Thinking
-            </span>
-
-            <span className="thinking-dots">
-              ...
-            </span>
-
+            <span>Thinking</span>
+            <span className="thinking-dots">...</span>
           </div>
-
         )}
-
       </div>
 
-
-      {/* =====================================
-          INPUT
-      ===================================== */}
-
-      <div className="chat-input">
-
+      <form
+        className="chat-input"
+        onSubmit={(event) => {
+          event.preventDefault();
+          void sendMessage();
+        }}
+      >
         <input
           type="text"
           placeholder={
@@ -276,42 +176,18 @@ function Chat() {
               ? "Ask about this document..."
               : "Ask something..."
           }
-
           value={question}
-
-          onChange={(e) =>
-            setQuestion(
-              e.target.value
-            )
-          }
-
-          onKeyDown={(e) => {
-            if (
-              e.key === "Enter" &&
-              !e.shiftKey
-            ) {
-              e.preventDefault();
-              sendMessage();
-            }
-          }}
-
+          onChange={(event) => setQuestion(event.target.value)}
           disabled={loading}
         />
 
         <button
-          onClick={sendMessage}
-          disabled={
-            loading ||
-            !question.trim()
-          }
+          type="submit"
+          disabled={loading || !question.trim()}
         >
-          {loading
-            ? "..."
-            : "Send →"}
+          {loading ? "Thinking..." : "Send →"}
         </button>
-
-      </div>
-
+      </form>
     </div>
   );
 }

@@ -1,126 +1,182 @@
+
+/* =========================================
+   FEATURES SECTION
+========================================= */
+
 .features {
-  padding: 100px 7%;
-
-  background: #060b18;
-
-  color: white;
+  padding: 90px 7%;
+  background: #f7f8fc;
+  color: #20283b;
 }
+
+/* =========================================
+   SECTION HEADING
+========================================= */
 
 .features-heading {
   max-width: 700px;
-
-  margin: 0 auto 60px;
-
+  margin: 0 auto 52px;
   text-align: center;
 }
 
 .features-heading > span {
-  color: #18c7ff;
-
-  font-size: 12px;
-
-  letter-spacing: 2px;
-
-  font-weight: 700;
+  color: #4f46e5;
+  font-size: 11px;
+  letter-spacing: 1.7px;
+  font-weight: 750;
 }
 
 .features-heading h2 {
   margin: 15px 0;
-
-  color: white;
-
-  font-size: 42px;
-
-  line-height: 1.2;
-
-  font-weight: 700;
+  color: #20283b;
+  font-size: clamp(30px, 4vw, 40px);
+  line-height: 1.25;
+  letter-spacing: -1px;
+  font-weight: 750;
 }
 
 .features-heading p {
-  color: #8998ae;
-
-  line-height: 1.7;
+  max-width: 600px;
+  margin: 0 auto;
+  color: #778198;
+  font-size: 15px;
+  line-height: 1.8;
 }
+
+/* =========================================
+   FEATURE GRID
+========================================= */
 
 .feature-grid {
-  max-width: 1100px;
-
+  max-width: 1150px;
   margin: auto;
-
   display: grid;
-
-  grid-template-columns: repeat(4, 1fr);
-
-  gap: 18px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
 }
 
+/* =========================================
+   FEATURE CARDS
+========================================= */
+
 .feature-card {
-  padding: 28px;
-
-  min-height: 230px;
-
+  min-width: 0;
+  min-height: 235px;
+  padding: 27px 23px;
   box-sizing: border-box;
-
-  background: #0b1527;
-
-  border: 1px solid #1b304c;
-
-  border-radius: 18px;
-
-  transition: all 0.25s ease;
+  background: #ffffff;
+  border: 1px solid #e7eaf1;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(31, 41, 55, 0.025);
+  transition:
+    transform 0.22s ease,
+    border-color 0.22s ease,
+    box-shadow 0.22s ease;
 }
 
 .feature-card:hover {
-  transform: translateY(-5px);
-
-  border-color: #18c7ff;
-
-  background: #0d192d;
-
-  box-shadow:
-    0 15px 40px rgba(0, 0, 0, 0.2);
+  transform: translateY(-4px);
+  border-color: #c7d2fe;
+  box-shadow: 0 12px 28px rgba(31, 41, 55, 0.06);
 }
+
+/* =========================================
+   FEATURE ICONS
+========================================= */
 
 .feature-icon {
-  color: #18c7ff;
-
-  font-size: 28px;
-
+  width: 48px;
+  height: 48px;
+  box-sizing: border-box;
+  padding: 12px;
   margin-bottom: 20px;
+  border-radius: 13px;
+  background: #eef2ff;
+  color: #4f46e5;
+  font-size: 24px;
 }
 
-.feature-card h3 {
-  margin: 0 0 12px;
+/* =========================================
+   FEATURE TEXT
+========================================= */
 
-  font-size: 19px;
+.feature-card h3 {
+  margin: 0 0 11px;
+  color: #29334b;
+  font-size: 17px;
+  line-height: 1.45;
+  font-weight: 700;
 }
 
 .feature-card p {
   margin: 0;
-
-  color: #8493aa;
-
-  line-height: 1.7;
-
-  font-size: 14px;
+  color: #778198;
+  font-size: 13px;
+  line-height: 1.8;
 }
 
-@media (max-width: 900px) {
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1000px) {
+  .features {
+    padding: 75px 5%;
+  }
+
   .feature-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 17px;
+  }
+
+  .feature-card {
+    min-height: 210px;
   }
 }
+
+/* =========================================
+   MOBILE
+========================================= */
 
 @media (max-width: 550px) {
   .features {
-    padding: 70px 20px;
+    padding: 60px 20px;
+  }
+
+  .features-heading {
+    margin-bottom: 35px;
   }
 
   .features-heading h2 {
-    font-size: 30px;
+    font-size: 29px;
+    letter-spacing: -0.6px;
+  }
+
+  .features-heading p {
+    font-size: 14px;
   }
 
   .feature-grid {
     grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .feature-card {
+    min-height: auto;
+    padding: 24px;
+  }
+
+  .feature-icon {
+    margin-bottom: 15px;
+  }
+}
+
+/* =========================================
+   ACCESSIBILITY
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .feature-card {
+    transition: none;
   }
 }
