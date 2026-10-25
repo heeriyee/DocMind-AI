@@ -35,7 +35,7 @@ function Dashboard() {
     setError("");
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/documents");
+      const response = await fetch("https://docmind-ai-nk0e.onrender.com/upload");
       const data = await response.json();
 
       if (!response.ok) {
@@ -73,7 +73,7 @@ function Dashboard() {
     setError("");
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/summary", {
+      const response = await fetch("https://docmind-ai-nk0e.onrender.com/summary", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ question: document }),

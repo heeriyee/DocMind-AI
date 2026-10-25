@@ -47,9 +47,9 @@ function Upload() {
       setMessage("Uploading and processing your PDF...");
       setIsError(false);
 
-      const response = await fetch(
-        "http://127.0.0.1:8000/upload",
-        {
+      const response = await 
+        fetch("https://docmind-ai-nk0e.onrender.com/upload", {
+        
           method: "POST",
           body: formData,
         }
