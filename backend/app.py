@@ -38,7 +38,7 @@ gemini_client = genai.Client(
     api_key=GEMINI_API_KEY
 )
 
-GENERATION_MODEL = "gemini-3.5-flash"
+GENERATION_MODEL = "gemini-3.8-flash"
 EMBEDDING_MODEL = "gemini-embedding-001"
 
 
