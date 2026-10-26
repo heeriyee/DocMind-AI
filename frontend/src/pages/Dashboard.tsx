@@ -35,7 +35,7 @@ function Dashboard() {
     setError("");
 
     try {
-      const response = await fetch("https://docmind-ai-nk0e.onrender.com/upload");
+      const response = await fetch("https://docmind-ai-nk0e.onrender.com/documents");
       const data = await response.json();
 
       if (!response.ok) {
